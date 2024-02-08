@@ -24,15 +24,31 @@ fn main() {
     let bmi = weight_in_kilos / (height_in_meters * height_in_meters);
     println!("Your BMI is: {}", bmi);
 
-    calculate_bmi_result(bmi);
+    let age : i32 = age.trim()
+        .parse::<i32>()
+        .expect("You can't parse it");
+
+    calculate_bmi_result(age, bmi);
 }
 
-fn calculate_bmi_result(bmi: f32) {
-    match bmi {
-       0.0..=18.5 => println!("Underweight"),
-       18.5..=25.0 => println!("Normal"),
-       25.0..=30.0 => println!("Overweight"),
-       30.0.. => println!("Obese"),
-       _ => println!("Unknown")
-    };
+fn calculate_bmi_result(age: i32, bmi: f32) {
+    if age > 18 && age < 69 {
+        match bmi {
+           x if x <= 18.5 => println!("Underweight"),
+           x if x > 18.5 && x <= 25.0 => println!("Normal"),
+           x if x > 25.0 && x <= 30.0 => println!("Overweight"),
+           x if x > 30.0 => println!("Obese"),
+           _ => println!("Unknown")
+        };
+    } else if age > 69 {
+        match bmi {
+           x if x <= 22.0 => println!("Underweight"),
+           x if x > 22.0 && x <= 28.0 => println!("Normal"),
+           x if x > 28.0 && x <= 30.0 => println!("Overweight"),
+           x if x > 30.0 => println!("Obese"),
+           _ => println!("Unknown")
+        };
+    } else {
+        println!("Could not calculate your BMI")
+    }
 }
